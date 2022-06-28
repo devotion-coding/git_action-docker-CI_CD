@@ -18,19 +18,13 @@ package com.example.git_actiondockerCI_CD.mybatis.mapper;
 
 import com.example.git_actiondockerCI_CD.mybatis.entity.MVCMybatisDemoUser;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 
 /**
  * 指定这是一个操作数据库的mapper
  *
  * @author paida 派哒 zeyu.pzy@alibaba-inc.com
  */
-@Mapper
+//@Mapper
 public interface MVCMybatisDemoUserMapper {
     MVCMybatisDemoUser queryUserInfo(String id);
 }
