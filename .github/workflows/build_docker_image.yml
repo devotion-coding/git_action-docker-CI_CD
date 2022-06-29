@@ -9,6 +9,7 @@ on:
 # 指定jobs
 jobs:
   build_docker_image:
+    # 在 ubuntu 环境中执行
     runs-on: ubuntu-latest
     steps:
       #  检出代码
@@ -42,5 +43,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ github.event.commits[0].id:0:7 }}
           labels: ${{ steps.meta.outputs.labels }}

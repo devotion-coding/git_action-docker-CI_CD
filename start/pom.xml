@@ -39,6 +39,7 @@
     </dependencies>
 
     <build>
+        <finalName>git_action-docker-CI_CD</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
