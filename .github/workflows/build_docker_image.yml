@@ -28,6 +28,7 @@ jobs:
         with:
             username: ${{ secrets.DOCKER_HUB_USERNAME }}
             password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        run: echo ${{ secrets.DOCKER_HUB_USERNAME }}  ${{ secrets.DOCKER_HUB_PASSWORD }}
       # 为docker 提取元数据
       - name: Extract metadata (tags, labels) for Docker
         id: meta
