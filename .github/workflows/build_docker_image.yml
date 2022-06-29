@@ -24,7 +24,7 @@ jobs:
         run: mvn -B package --file pom.xml
       # 登录docker hub
       - name: login to docker hub
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c
+        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
             username: ${{ secrets.DOCKER_HUB_USERNAME }}
             password: ${{ secrets.DOCKER_HUB_PASSWORD }}
@@ -36,7 +36,7 @@ jobs:
           images: outman2444/git_action-docker-CI_CD
       # 构建 docker镜像  并发布到docker hub
       - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         with:
           context: .
           push: true
