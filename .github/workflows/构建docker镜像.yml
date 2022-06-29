@@ -35,7 +35,7 @@ jobs:
         DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
       # 指定login命令登录hub.docker.com，帐号和密码已经在GitHub网页中配置好了
       run: |
-        echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+        echo "${DOCKER_HUB_PASSWORD}" | docker login --username ${DOCKER_HUB_USERNAME} --password-stdin
     - name: Set up Docker Buildx
       # 使用buildx来构建镜像，这个工具功能很丰富
       uses: crazy-max/ghaction-docker-buildx@v1
