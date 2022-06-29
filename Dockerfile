@@ -8,3 +8,4 @@ WORKDIR /home/app/
 COPY start/target/git_action-docker-CI_CD.jar ./git_action-docker-CI_CD.jar
 # 启动
 CMD ["java -jar" ,"git_action-docker-CI_CD.jar"]
+#sdsfs
