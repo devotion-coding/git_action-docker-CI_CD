@@ -41,5 +41,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ github.event.commits[0].id[0,7] }}
+          tags: ${{ github.event.commits[0].id}}
           labels: ${{ steps.meta.outputs.labels }}
