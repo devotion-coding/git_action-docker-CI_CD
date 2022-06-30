@@ -12,13 +12,6 @@ jobs:
     # 在 ubuntu 环境中执行
     runs-on: ubuntu-latest
     steps:
-      # 登录docker hub
-      - name: login to docker hub
-        #        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       #  检出代码
       - name: checkout code
         uses: actions/checkout@v3
@@ -30,23 +23,20 @@ jobs:
       #  编译打包
       - name: mvn build package
         run: mvn -B package --file pom.xml
-#      # 登录docker hub
-#      - name: login to docker hub
-##        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
-#        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-#        with:
-#            username: ${{ secrets.DOCKER_HUB_USERNAME }}
-#            password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      # 登录docker hub
+      - name: login to docker hub
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+            username: ${{ secrets.DOCKER_HUB_USERNAME }}
+            password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       # 为docker 提取元数据
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-#          images: outman2444/git_action-docker-CI_CD
           images: outman2444/git_action-docker-ci_cd
       # 构建 docker镜像  并发布到docker hub
       - name: Build and push Docker image
-#        uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
