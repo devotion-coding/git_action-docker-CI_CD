@@ -42,11 +42,13 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: build docker image
-        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.commits[0].id }} .
+#        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.commits[0].id }} .
+        run: docker build -t ${{ env.REGISTRY }}/test:last .
       - name: echo docker images
         run: docker images
       - name: docker push
-        run: docker push  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.commits[0].id }}
+#        run: docker push  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.commits[0].id }}
+        run: docker push  ${{ env.REGISTRY }}/test:last
 
 #      # 构建 docker镜像  并发布到docker hub
 #      - name: Build and push Docker image
