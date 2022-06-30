@@ -9,6 +9,8 @@ on:
 # 指定环境变量
 env:
   image_name: git_action-docker-ci_cd
+  IMAGE_NAME: git_action-docker-ci_cd
+  REGISTRY: outman2444
 # 指定jobs
 jobs:
   build_docker_image:
