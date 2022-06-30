@@ -8,7 +8,6 @@ on:
     branches: [ "main" ]
 # 指定环境变量
 env:
-#  image_name: git_action-docker-ci_cd
   IMAGE_NAME: git_action-docker-ci_cd
   REGISTRY: outman2444
 # 指定jobs
@@ -36,19 +35,23 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: echo docker images
         run: docker images
+      - name: build
       # 为docker 提取元数据
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      # 构建 docker镜像  并发布到docker hub
-      - name: Build and push Docker image
-        id: build-and-push
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          github-token: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      - name: build docker image
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.commits[0].id }} .
+
+#      # 构建 docker镜像  并发布到docker hub
+#      - name: Build and push Docker image
+#        id: build-and-push
+#        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+#        with:
+#          github-token: ${{ secrets.DOCKER_HUB_PASSWORD }}
+#          context: .
+#          push: true
+#          tags: ${{ steps.meta.outputs.tags }}
+#          labels: ${{ steps.meta.outputs.labels }}
