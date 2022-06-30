@@ -10,6 +10,7 @@ on:
 env:
   IMAGE_NAME: git_action-docker-ci_cd
   REGISTRY: outman2444
+  COMMIT_HASH: ${{ github.event.commits[0].id }}
 # 指定jobs
 jobs:
   build_docker_image:
@@ -48,7 +49,7 @@ jobs:
         run: docker images
       - name: docker push
 #        run: docker push  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.commits[0].id }}
-        run: docker push  ${{ env.REGISTRY }}/test:${{ github.event.commits[0].id }}
+        run: docker push  ${{ env.REGISTRY }}/test:"${{env.COMMIT_HASH:0:7}}"
 
 #      # 构建 docker镜像  并发布到docker hub
 #      - name: Build and push Docker image
