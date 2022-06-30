@@ -23,8 +23,6 @@ jobs:
       #  编译打包
       - name: mvn build package
         run: mvn -B package --file pom.xml
-      - name: echo
-        run: echo ${{ secrets.DOCKER_HUB_USERNAME }}  ${{ secrets.DOCKER_HUB_PASSWORD }}
       # 登录docker hub
       - name: login to docker hub
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
@@ -43,5 +41,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ github.event.commits[0].id }}
+          tags: ${{ github.event.commits[0].id:0,7 }}
           labels: ${{ steps.meta.outputs.labels }}
