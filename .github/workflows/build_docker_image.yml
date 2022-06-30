@@ -27,9 +27,10 @@ jobs:
       - name: login to docker hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
-            registry: ${{ secrets.DOCKER_HUB_USERNAME }}
+#            registry: ${{ secrets.DOCKER_HUB_USERNAME }}
             username: ${{ secrets.DOCKER_HUB_USERNAME }}
             password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+            logout: false
       # 为docker 提取元数据
       - name: Extract metadata (tags, labels) for Docker
         id: meta
