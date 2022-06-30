@@ -47,8 +47,8 @@ jobs:
         run: docker images
       - name: run docker image
         run: docker run -dit ${{ env.IMAGE_NAME }} /bin/bash
-      - name: stop docker image
-        run: docker stop  ${{ env.IMAGE_NAME }}
+#      - name: stop docker image
+#        run: docker stop  ${{ env.IMAGE_NAME }}
       - name: docker push
         run: docker commit ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.commits[0].id }}
 
