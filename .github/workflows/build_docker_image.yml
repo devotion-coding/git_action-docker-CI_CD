@@ -42,15 +42,15 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: build docker image
-        run: docker build -t ${{ env.IMAGE_NAME }} .
+        run: docker build -t myimage .
       - name: echo docker images
         run: docker images
       - name: run docker image
-        run: docker run -dit ${{ env.IMAGE_NAME }} /bin/bash
+        run: docker run -dit myimage /bin/bash
       - name: docker ps
         run: docker ps
       - name: docker push
-        run: docker commit ${{ env.IMAGE_NAME }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.commits[0].id }}
+        run: docker commit myimage ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.commits[0].id }}
 
 #      # 构建 docker镜像  并发布到docker hub
 #      - name: Build and push Docker image
