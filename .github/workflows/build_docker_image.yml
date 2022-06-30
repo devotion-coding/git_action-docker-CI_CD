@@ -28,15 +28,6 @@ jobs:
       #  编译打包
       - name: mvn build package
         run: mvn -B package --file pom.xml
-      # 安装 cosign
-      - name: Install cosign
-        if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@7e0881f8fe90b25e305bbf0309761e9314607e25
-        with:
-          cosign-release: 'v1.9.0'
-      # 设置docker build
-      - name: Setup Docker buildx
-        uses: docker/setup-buildx-action@79abd3f86f79a9d68a23c75a09a9a85889262adf
       # 登录docker hub
       - name: login to docker hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
@@ -48,7 +39,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/${{env.IMAGE_NAME}}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       # 构建 docker镜像  并发布到docker hub
       - name: Build and push Docker image
         id: build-and-push
@@ -59,10 +50,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      # 发布
-      - name: Sign the published Docker image
-        env:
-          COSIGN_EXPERIMENTAL: "true"
-        # This step uses the identity token to provision an ephemeral certificate
-        # against the sigstore community Fulcio instance.
-        run: cosign sign ${{ steps.meta.outputs.tags }}@${{ steps.build-and-push.outputs.digest }}
