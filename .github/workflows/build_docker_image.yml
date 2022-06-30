@@ -47,6 +47,8 @@ jobs:
         run: docker images
       - name: run docker image
         run: docker run -dit myimage /bin/bash
+      - name: sleep
+        run: sleep 5
       - name: docker ps
         run: docker ps
       - name: docker push
