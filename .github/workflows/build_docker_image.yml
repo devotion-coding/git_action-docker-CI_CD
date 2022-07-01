@@ -42,9 +42,11 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: spilt git hash
+        run: url=${{env.COMMIT_HASH}} && echo ${url: 0: 7}
       - name: build docker image
 #        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.commits[0].id }} .
-        run: hash="${{ env.COMMIT_HASH }}" && docker build -t ${{ env.REGISTRY }}/test:"${hash:0:7}" .
+        run:  docker build -t ${{ env.REGISTRY }}/test:"${hash:0:7}" .
       - name: echo docker images
         run: docker images
       - name: docker push
