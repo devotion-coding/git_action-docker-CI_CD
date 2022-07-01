@@ -20,8 +20,8 @@ jobs:
     steps:
       - id: spil_git_commit_hash
         run: commit_hash=${{ github.event.commits[0].id }} && \
-            commit_hash=${commit_hash:0:7} && \
-            echo "::set-output name=hash::${commit_hash}"
+            spiled_commit_hash=${commit_hash:0:7} && \
+            echo "::set-output name=hash::${spiled_commit_hash}"
   # 构建docker 镜像
   build_docker_image:
     # 在 ubuntu 环境中执行
