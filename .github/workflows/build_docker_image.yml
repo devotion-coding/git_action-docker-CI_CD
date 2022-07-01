@@ -43,8 +43,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: spilt git hash
-        run: url=${{env.COMMIT_HASH}} && \
-              echo "${url:0:7}"
+        run: url=${{env.COMMIT_HASH}} && echo "${url:0:7}"
       - name: build docker image
 #        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.commits[0].id }} .
         run:  docker build -t ${{ env.REGISTRY }}/test:"${hash:0:7}" .
