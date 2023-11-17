@@ -17,8 +17,6 @@
     </properties>
 
     <modules>
-        <module>git_action-docker-CI_CD-model</module>
-        <module>git_action-docker-CI_CD-service</module>
         <module>git_action-docker-CI_CD-web</module>
         <module>start</module>
     </modules>
